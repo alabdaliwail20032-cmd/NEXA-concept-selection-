@@ -1,0 +1,7 @@
+{
+  "name": "NEXA Concept Selection",
+  "description": "Interactive visual methodology application explaining NEXA structured criteria weighting, screening, and scoring for product concept decisions.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

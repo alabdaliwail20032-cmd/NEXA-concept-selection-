@@ -1,0 +1,88 @@
+{
+  "entities": {
+    "SelectionProject": {
+      "title": "SelectionProject",
+      "description": "A concept selection project tracking stages, criteria, and evaluation decisions.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the concept selection project.",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional engineering scope or description of the selection exercise.",
+          "maxLength": 500
+        },
+        "ownerId": {
+          "type": "string",
+          "description": "The UID of the engineer or facilitator who created the project."
+        },
+        "currentStage": {
+          "type": "string",
+          "description": "The active workflow stage ID in the NEXA concept selection process.",
+          "maxLength": 50
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp."
+        }
+      },
+      "required": ["title", "ownerId", "currentStage", "createdAt", "updatedAt"]
+    },
+    "ProjectCriterion": {
+      "title": "ProjectCriterion",
+      "description": "A project-defined selection criterion with weight and focus description.",
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "type": "string",
+          "description": "ID of the parent selection project."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the criterion (e.g. Technical Feasibility).",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "focusArea": {
+          "type": "string",
+          "description": "Focus area and evaluation description.",
+          "maxLength": 300
+        },
+        "weight": {
+          "type": "number",
+          "description": "Weight percentage allocated to this criterion (0-100)."
+        },
+        "ownerId": {
+          "type": "string",
+          "description": "The UID of the creator."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp."
+        }
+      },
+      "required": ["projectId", "name", "ownerId", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/projects/{projectId}": {
+      "schema": "SelectionProject",
+      "description": "Collection of concept selection projects owned by engineers."
+    },
+    "/projects/{projectId}/criteria/{criterionId}": {
+      "schema": "ProjectCriterion",
+      "description": "Subcollection of custom selection criteria defined for a project."
+    }
+  }
+}

@@ -1,0 +1,85 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default-deny catch-all for all documents
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // Validation for SelectionProject entity
+    function isValidSelectionProject(data) {
+      return data.keys().hasAll(['title', 'ownerId', 'currentStage', 'createdAt', 'updatedAt']) &&
+             data.keys().hasOnly(['title', 'description', 'ownerId', 'currentStage', 'createdAt', 'updatedAt']) &&
+             data.title is string && data.title.size() >= 1 && data.title.size() <= 100 &&
+             (!('description' in data) || (data.description is string && data.description.size() <= 500)) &&
+             data.ownerId == request.auth.uid &&
+             data.currentStage is string && data.currentStage.size() <= 50 &&
+             data.createdAt is string && data.createdAt.size() <= 64 &&
+             data.updatedAt is string && data.updatedAt.size() <= 64;
+    }
+
+    // Validation for ProjectCriterion entity
+    function isValidProjectCriterion(data, parentProjectId) {
+      return data.keys().hasAll(['projectId', 'name', 'ownerId', 'createdAt']) &&
+             data.keys().hasOnly(['projectId', 'name', 'focusArea', 'weight', 'ownerId', 'createdAt']) &&
+             data.projectId == parentProjectId &&
+             data.name is string && data.name.size() >= 1 && data.name.size() <= 100 &&
+             (!('focusArea' in data) || (data.focusArea is string && data.focusArea.size() <= 300)) &&
+             (!('weight' in data) || (data.weight is number && data.weight >= 0 && data.weight <= 100)) &&
+             data.ownerId == request.auth.uid &&
+             data.createdAt is string && data.createdAt.size() <= 64;
+    }
+
+    // Collection: Projects
+    match /projects/{projectId} {
+      allow get: if isSignedIn() && isValidId(projectId) && existing().ownerId == request.auth.uid;
+      allow list: if isSignedIn() && resource.data.ownerId == request.auth.uid;
+      allow create: if isSignedIn() && isValidId(projectId) && isValidSelectionProject(incoming());
+      allow update: if isSignedIn() && isValidId(projectId) &&
+                       existing().ownerId == request.auth.uid &&
+                       isValidSelectionProject(incoming()) &&
+                       incoming().ownerId == existing().ownerId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().diff(existing()).affectedKeys().hasOnly(['title', 'description', 'currentStage', 'updatedAt']);
+      allow delete: if isSignedIn() && isValidId(projectId) && existing().ownerId == request.auth.uid;
+
+      // Subcollection: Criteria
+      match /criteria/{criterionId} {
+        allow get: if isSignedIn() && isValidId(projectId) && isValidId(criterionId) &&
+                      get(/databases/$(database)/documents/projects/$(projectId)).data.ownerId == request.auth.uid;
+        allow list: if isSignedIn() && isValidId(projectId) &&
+                       resource.data.ownerId == request.auth.uid;
+        allow create: if isSignedIn() && isValidId(projectId) && isValidId(criterionId) &&
+                         get(/databases/$(database)/documents/projects/$(projectId)).data.ownerId == request.auth.uid &&
+                         isValidProjectCriterion(incoming(), projectId);
+        allow update: if isSignedIn() && isValidId(projectId) && isValidId(criterionId) &&
+                         get(/databases/$(database)/documents/projects/$(projectId)).data.ownerId == request.auth.uid &&
+                         existing().ownerId == request.auth.uid &&
+                         isValidProjectCriterion(incoming(), projectId) &&
+                         incoming().ownerId == existing().ownerId &&
+                         incoming().projectId == existing().projectId &&
+                         incoming().diff(existing()).affectedKeys().hasOnly(['name', 'focusArea', 'weight']);
+        allow delete: if isSignedIn() && isValidId(projectId) && isValidId(criterionId) &&
+                         get(/databases/$(database)/documents/projects/$(projectId)).data.ownerId == request.auth.uid &&
+                         existing().ownerId == request.auth.uid;
+      }
+    }
+  }
+}
