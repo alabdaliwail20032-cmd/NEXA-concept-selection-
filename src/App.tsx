@@ -134,8 +134,8 @@ export default function App() {
           </section>
 
           {/* Connector Arrow */}
-          <div className="flex justify-center -my-2 relative z-10">
-            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292]">
+          <div className="h-12 flex items-center justify-center relative z-10">
+            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292] relative transform-none">
               <ArrowDown className="w-4 h-4" />
             </div>
           </div>
@@ -192,8 +192,8 @@ export default function App() {
           </section>
 
           {/* Connector Arrow */}
-          <div className="flex justify-center -my-2 relative z-10">
-            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292]">
+          <div className="h-12 flex items-center justify-center relative z-10">
+            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292] relative transform-none">
               <ArrowDown className="w-4 h-4" />
             </div>
           </div>
@@ -284,8 +284,8 @@ export default function App() {
           </section>
 
           {/* Connector Arrow */}
-          <div className="flex justify-center -my-2 relative z-10">
-            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292]">
+          <div className="h-12 flex items-center justify-center relative z-10">
+            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292] relative transform-none">
               <ArrowDown className="w-4 h-4" />
             </div>
           </div>
@@ -349,8 +349,8 @@ export default function App() {
           </section>
 
           {/* Connector Arrow */}
-          <div className="flex justify-center -my-2 relative z-10">
-            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292]">
+          <div className="h-12 flex items-center justify-center relative z-10">
+            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292] relative transform-none">
               <ArrowDown className="w-4 h-4" />
             </div>
           </div>
@@ -827,8 +827,8 @@ export default function App() {
           </section>
 
           {/* Connector Arrow */}
-          <div className="flex justify-center -my-2 relative z-10">
-            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292]">
+          <div className="h-12 flex items-center justify-center relative z-10">
+            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292] relative transform-none">
               <ArrowDown className="w-4 h-4" />
             </div>
           </div>
@@ -985,8 +985,8 @@ export default function App() {
           </section>
 
           {/* Connector Arrow */}
-          <div className="flex justify-center -my-2 relative z-10">
-            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292]">
+          <div className="h-12 flex items-center justify-center relative z-10">
+            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292] relative transform-none">
               <ArrowDown className="w-4 h-4" />
             </div>
           </div>
@@ -1046,8 +1046,8 @@ export default function App() {
           </section>
 
           {/* Connector Arrow */}
-          <div className="flex justify-center -my-2 relative z-10">
-            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292]">
+          <div className="h-12 flex items-center justify-center relative z-10">
+            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292] relative transform-none">
               <ArrowDown className="w-4 h-4" />
             </div>
           </div>
@@ -1224,8 +1224,8 @@ export default function App() {
           </section>
 
           {/* Connector Arrow */}
-          <div className="flex justify-center -my-2 relative z-10">
-            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292]">
+          <div className="h-12 flex items-center justify-center relative z-10">
+            <div className="w-8 h-8 rounded-full bg-[#FFFFFF] border border-[#E9E8EB] shadow-xs flex items-center justify-center text-[#909292] relative transform-none">
               <ArrowDown className="w-4 h-4" />
             </div>
           </div>
